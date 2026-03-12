@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bar Select — Menú</title>
+  <meta name="description" content="Catálogo de comidas, minutas y dulces. Consultas y pedidos por chat. Horarios e historia del comedor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style_principal.css">
+   <link rel="stylesheet" href="css/style_nav.css">
+  <!-- Favicon embebido para evitar 404 /favicon.ico -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' x='6' font-size='48'%3E%F0%9F%8D%B4%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<nav class="topnav" id="topnav">
+  <div class="nav-flex">
+    <a href="#inicio" class="nav-logo">
+      <img src="img/logotipo.png" alt="Bar Select" class="nav-icon">
+      <span class="nav-title">Bar Select</span>
+    </a>
+
+    <!-- Botón hamburguesa (visible solo en móvil) -->
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+
+    <ul class="nav-links" id="navMenu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#catalogo">Menú</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <div class="header-center">
+    <div class="header-inner">
+      <img src="img/logo.png" alt="Bar Select" class="brand-logo">
+      <p class="subtitle">
+        <span class="pill-strong">Sabor Tradicional</span>
+        Cocina casera con alma rústica y un toque contemporáneo. Explorá nuestro catálogo de comidas, minutas y dulces.
+        Pedidos y consultas por chat.
+      </p>
+    </div>
+  </div>
+</header>
+
+  <main class="container">
+    <section id="catalogo">
+      <h2 class="section-title">Catálogo</h2>
+      <p class="section-lead">Carta <strong>tipo menú expandible</strong>. <span class="badge-small">Tip:</span> <em>tocá la foto de un plato para verla en grande</em>.</p>
+      <div id="menu-accordion" class="accordion"></div>
+    </section>
+
+    <section id="horarios">
+      <h2 class="section-title">Horarios del local</h2>
+      <div class="two-col">
+        <div class="panel grain">
+          <table class="hours" aria-label="Horarios de atención">
+            <tbody id="hours-body"></tbody>
+          </table>
+          <div class="notice">Ubicación: <strong>Calle Ejemplo 123, Asunción</strong> · Tel: <a href="tel:+59500000000">+595 000 000 00</a></div>
+        </div>
+        <div class="panel">
+          <h3 style="margin-top:0;color:#fff">Reservas y eventos</h3>
+          <p class="muted">Para grupos, aniversarios y reuniones laborales, escribinos por el chat o al WhatsApp y armamos un menú a medida.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="historia">
+      <h2 class="section-title">Nuestra historia</h2>
+      <div class="panel grain">
+        <p>Empezamos como un pequeño comedor de barrio, con recetas heredadas y pan casero tibio. Con el tiempo, sumamos técnicas modernas sin perder la esencia: ingredientes frescos, cocción lenta y hospitalidad genuina. Hoy seguimos honrando esa raíz rústica, con una presentación actual y cuidada.</p>
+        <p class="muted">"Cocinar es un acto de amor con sabor a hogar."</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-title">Bar Select</div>
+        <p class="muted">Comidas caseras, minutas y dulces. Catálogo de visualización; hacé tu pedido por chat.</p>
+      </div>
+      <div>
+        <div class="footer-title">Contacto</div>
+        <p class="muted">Tel: <a href="tel:+59500000000">+595 000 000 00</a><br>WhatsApp: <a href="#" id="wa-footer">+595 000 000 00</a><br>Email: <a href="mailto:contacto@pulperia.com">contacto@pulperia.com</a><br><span class="pill">Hecho en Paraguay 🇵🇾</span></p>
+      </div>
+      <div>
+        <div class="footer-title">Dirección</div>
+        <p class="muted">Calle Ejemplo 123, Asunción, Paraguay</p>
+      </div>
+    </div>
+    <div class="container" style="opacity:.7;margin-top:10px">© <span id="year"></span> Bar Select. Todos los derechos reservados.</div>
+  </footer>
+
+  <!-- Lightbox para fotos -->
+  <div id="lightbox"><img id="lightboxImg" src="" alt="Foto del plato"></div>
+
+  <!-- Chat flotante -->
+  <button class="chat-btn" id="chatBtn" aria-label="Abrir chat" title="Consultas y pedidos">💬</button>
+  <aside class="chat-panel" id="chatPanel" aria-live="polite" aria-hidden="true">
+    <div class="chat-header">
+      <strong>Chat – Consultas y pedidos</strong>
+      <button class="btn secondary" id="closeChat" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="chat-body">
+      <form id="chatForm">
+        <label for="nombre">Tu nombre</label>
+        <input id="nombre" name="nombre" placeholder="Ej: Ana López" />
+
+        <label for="canal">Canal preferido</label>
+        <select id="canal" name="canal">
+          <option value="whatsapp">WhatsApp</option>
+          <option value="telefono">Teléfono</option>
+          <option value="email">Email</option>
+        </select>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="3" placeholder="Hola, quiero pedir 2 empanadas de carne y 1 guaraná..." required></textarea>
+
+        <div class="chat-actions">
+          <button type="submit" class="btn">Enviar</button>
+          <button type="button" class="btn secondary" id="waBtn">WhatsApp</button>
+        </div>
+        <div class="notice">El botón WhatsApp abre la conversación con un mensaje prellenado.</div>
+      </form>
+    </div>
+  </aside>
+    <script src="scripts/content.js"></script>
+    <script src="scripts/nav.js"></script>
+</body>
+</html>

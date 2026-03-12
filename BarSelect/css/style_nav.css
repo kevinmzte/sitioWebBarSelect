@@ -1,0 +1,199 @@
+/* === NAVBAR RÚSTICO MODERNO — Versión profesional === */
+
+.topnav {
+  position: absolute; /* no fijo, se queda arriba */
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(15, 14, 12, 0.85), rgba(15, 14, 12, 0.2), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 10;
+  transition: background 0.3s ease;
+  padding: 14px 0; /* más altura */
+}
+
+/* Contenedor interno */
+.nav-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Logo + título */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-icon {
+  width: 60px; /* más grande */
+  height: 60px;
+  object-fit: contain;
+  border-radius: 12px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+
+.nav-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.5rem; /* más grande */
+  color: #f7f3ea;
+  letter-spacing: 0.8px;
+}
+
+/* Enlaces del menú */
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #f7f3ea;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #c28b53;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c28b53, #8e5d2c);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ajustes responsive */
+@media (max-width: 900px) {
+  .topnav {
+    padding: 10px 0;
+  }
+  .nav-flex {
+    padding: 0 20px;
+  }
+  .nav-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .nav-links {
+    gap: 20px;
+    font-size: 0.95rem;
+  }
+  .nav-title {
+    font-size: 1.2rem;
+  }
+}
+
+/* === NAV RESPONSIVE (versión móvil con hamburguesa) === */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #f7f3ea;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* --- Configuración móvil --- */
+@media (max-width: 768px) {
+  .nav-title { display: none; } /* opcional, para que no se amontone */
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    background: rgba(15,14,12,0.95);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px 14px;
+    width: min(82vw, 280px);
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .nav-links.show { display: flex; }
+  .nav-links a {
+    padding: 8px 6px;
+    border-radius: 6px;
+  }
+  .nav-links a:hover {
+    background: rgba(255,255,255,0.08);
+  }
+}
+
+
+/* --- HERO con parallax --- */
+.hero{
+  position: relative;
+  min-height: 60vh;                /* altura visible del bloque */
+  display: flex;
+  align-items: center;
+  isolation: isolate;              /* separa capas para overlays */
+}
+
+.hero-content{ 
+  position: relative; 
+  z-index: 2;                      /* encima del fondo */
+}
+
+/* capa de fondo (imagen + overlay + leve zoom) */
+.hero-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: var(--hero-img);
+  background-size: cover;
+  background-position: center 30%;
+  transform: translateY(var(--py, 0px)) scale(1.12);
+  will-change: transform;
+}
+
+/* degradado para legibilidad (rústico) */
+.hero-bg::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(1200px 500px at 80% -10%, rgba(194,139,83,.18) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.25) 35%, rgba(0,0,0,.35) 100%);
+  pointer-events:none;
+}
+
+/* spacing para que el nav absoluto no tape el hero */
+header#inicio{ padding-top: 80px; }
+
+/* móvil */
+@media (max-width: 768px){
+  .hero{ min-height: 56vh; }
+  .hero-bg{ background-position: center 40%; }
+}
