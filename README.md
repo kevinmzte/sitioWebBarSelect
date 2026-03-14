@@ -32,5 +32,3 @@ Este proyecto fue desarrollado como **práctica de desarrollo frontend**, con el
 - Organización de contenido para sitios comerciales
 - Implementación de interacciones con JavaScript
 
-## Estructura del proyecto
-
